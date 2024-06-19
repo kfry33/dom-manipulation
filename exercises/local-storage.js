@@ -38,3 +38,58 @@
  */
 
 // Your code goes here...
+
+const allItemsCont = document.querySelector('.cardsContainer');
+let favArr = [];
+
+let list = localStorage.getItem('favorites');
+
+if(list) {
+  const cards = document.querySelectorAll('.card');
+  localStorage.setItem('favorites', list);
+
+    Array.from(cards).forEach((card)=>{
+    if(list.includes(card.id)){
+      card.style.backgroundColor = 'red';
+      favArr.push(card.id);
+    }
+  })    
+};
+
+const changeColor = (item, color) => {
+  item.style.backgroundColor = color;
+}
+
+const addToFavs = (id) => {
+  favArr.push(id);
+  localStorage.setItem('favorites', favArr);
+}
+
+const removeFromFavs = (id) => {
+  favArr.splice(favArr.indexOf(id), 1).join(',');
+  localStorage.setItem('favorites', favArr);
+}
+
+
+// if(list) {
+//   localStorage.setItem('favorites', list);
+// }
+
+// for(let id of favArr) {
+//   document.getElementById(id).style.backgroundColor = 'red';
+// }
+
+const callbackFn = (e) => {
+  const item = e.target;
+  if (Array.from(item.classList).includes('card')) {
+    if (item.style.backgroundColor === '' || item.style.backgroundColor === 'white') {
+      changeColor(item, 'red');
+      addToFavs(item.id);
+    } else {
+      changeColor(item, 'white');
+      removeFromFavs(item.id);
+    }
+  }
+};
+
+allItemsCont.addEventListener('click', callbackFn);
