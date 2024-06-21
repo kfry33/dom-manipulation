@@ -70,15 +70,6 @@ const removeFromFavs = (id) => {
   localStorage.setItem('favorites', favArr);
 }
 
-
-// if(list) {
-//   localStorage.setItem('favorites', list);
-// }
-
-// for(let id of favArr) {
-//   document.getElementById(id).style.backgroundColor = 'red';
-// }
-
 const callbackFn = (e) => {
   const item = e.target;
   if (Array.from(item.classList).includes('card')) {
